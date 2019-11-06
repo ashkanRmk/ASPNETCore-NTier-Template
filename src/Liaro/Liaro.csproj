@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>Liaro</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.1.3" />
+    <PackageReference Include="Sentry.AspNetCore" Version="1.2.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.9.406" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Liaro.DataLayer\Liaro.DataLayer.csproj" />
+    <ProjectReference Include="..\Liaro.Entities\Liaro.Entities.csproj" />
+    <ProjectReference Include="..\Liaro.ModelLayer\Liaro.ModelLayer.csproj" />
+    <ProjectReference Include="..\Liaro.ServiceLayer\Liaro.ServiceLayer.csproj" />
+    <ProjectReference Include="..\Liaro.Common\Liaro.Common.csproj" />
+  </ItemGroup>
+
+</Project>

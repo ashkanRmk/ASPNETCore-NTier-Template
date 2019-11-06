@@ -1,0 +1,24 @@
+dotnet ef migrations add Init
+
+Created Time: 2019-10-27.16:36:37
+-----------------------------------
+dotnet ef migrations add init
+
+Created Time: 2019-10-27.16:37:46
+-----------------------------------
+dotnet ef migrations add init
+
+Created Time: 2019-10-27.16:38:46
+-----------------------------------
+dotnet ef migrations script 0 20191027130854_init -o ./Migrations/Scripts/20191027130854_init.sql
+
+Created Time: 2019-10-27.16:39:29
+-----------------------------------
+dotnet ef migrations add add-mobile-login
+
+Created Time: 2019-10-28.22:09:17
+-----------------------------------
+dotnet ef migrations script 20191027130854_init 20191028183935_add-mobile-login -o ./Migrations/Scripts/20191028183935_add-mobile-login.sql
+
+Created Time: 2019-10-28.22:10:03
+-----------------------------------

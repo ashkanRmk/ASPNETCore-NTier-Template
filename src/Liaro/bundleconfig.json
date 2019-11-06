@@ -1,0 +1,26 @@
+[
+    {
+      "outputFileName": "wwwroot/bundle/app.min.css",
+      "inputFiles": [
+        "wwwroot/css/site.css",
+        "wwwroot/css/fontiran.css",
+        "wwwroot/css/fontawesome.css"
+      ],
+      "minify": {
+        "enabled": true,
+        "renameLocals": true
+      },
+      "sourceMap": false
+    },
+    {
+      "outputFileName": "wwwroot/bundle/app.min.js",
+      "inputFiles": [
+        "wwwroot/js/site.js"
+      ],
+      "minify": {
+        "enabled": true,
+        "renameLocals": true
+      },
+      "sourceMap": false
+    }
+  ]
