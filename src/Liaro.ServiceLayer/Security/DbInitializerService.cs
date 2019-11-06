@@ -79,24 +79,7 @@ namespace Liaro.ServiceLayer.Security
                             Password = _securityService.GetSha256Hash("1234"),
                             SerialNumber = Guid.NewGuid().ToString("N")
                         });
-                        adminUsers.Add(new User
-                        {
-                            Username = "Samane",
-                            DisplayName = "سمانه",
-                            IsActive = true,
-                            LastLoggedIn = null,
-                            Password = _securityService.GetSha256Hash("1234"),
-                            SerialNumber = Guid.NewGuid().ToString("N")
-                        });
-                        adminUsers.Add(new User
-                        {
-                            Username = "Sahar",
-                            DisplayName = "سحر",
-                            IsActive = true,
-                            LastLoggedIn = null,
-                            Password = _securityService.GetSha256Hash("1234"),
-                            SerialNumber = Guid.NewGuid().ToString("N")
-                        });
+
 
                         context.AddRange(adminUsers);
                         context.SaveChanges();

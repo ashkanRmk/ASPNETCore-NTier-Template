@@ -45,15 +45,8 @@ namespace Liaro.ServiceLayer
             if (!string.IsNullOrWhiteSpace(token2)) request.AddParameter("token2", token2);
             if (!string.IsNullOrWhiteSpace(token3)) request.AddParameter("token20", token3);
 
-            var response = await _client.ExecuteTaskAsync<dynamic>(request);
-            var tmp = response.Data["return"]["status"];
-            return new SmsResultVM()
-            {
-                @return = new Return()
-                {
-                    status = (int)tmp
-                }
-            };
+            var response = await _client.ExecuteTaskAsync<SmsResultVM>(request);
+            return response.Data;
         }
     }
 }

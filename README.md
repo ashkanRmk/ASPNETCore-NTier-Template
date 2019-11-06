@@ -12,20 +12,20 @@
 
 ## Libs
 
-- [X] Kavenegar SMS Panel
+- [X] SMS Panel (Kavenegar)
 - [X] Serilog
 - [X] Sentry
 - [X] AutoMapper
-- [X] MVC
-- [X] Common
+- [X] Common Utilities
 - [X] Swagger
 - [X] RestSharp
 - [X] FluentValidation
 - [X] DotNet Watcher
-- [X] BundlerMinifier
+- [X] Bundler Minifier
 - [ ] Hangfire
 - [ ] RabbitMQ
 - [ ] Minio Object Storage
+- [ ] Payment Gateway (PayPing)
 
 ## Environment Variables
 
