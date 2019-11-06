@@ -14,6 +14,7 @@
 
 - [X] Kavenegar SMS Panel
 - [X] Serilog
+- [X] Sentry
 - [X] AutoMapper
 - [X] MVC
 - [X] Common
