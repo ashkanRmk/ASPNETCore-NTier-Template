@@ -24,6 +24,7 @@
 - [X] FluentValidation
 - [X] DotNet Watcher
 - [X] Bundler Minifier
+- [X] Short links generator
 - [ ] Hangfire
 - [ ] RabbitMQ
 - [ ] Minio Object Storage

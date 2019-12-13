@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Threading;
 using Liaro.Entities.Security;
+using Liaro.Entities;
+using System;
 
 namespace Liaro.DataLayer.Context
 {
@@ -12,6 +14,7 @@ namespace Liaro.DataLayer.Context
         public virtual DbSet<Role> Roles { set; get; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<UserToken> UserTokens { get; set; }
+        public virtual DbSet<ShortLink> ShortLinks { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
@@ -25,36 +28,39 @@ namespace Liaro.DataLayer.Context
 
         private void OnBeforeSaving()
         {
-            // foreach (var entry in ChangeTracker.Entries<Product>())
-            // {
-            //     switch (entry.State)
-            //     {
-            //         case EntityState.Added:
-            //             entry.CurrentValues["IsDeleted"] = false;
-            //             entry.CurrentValues["CreatedOn"] = DateTime.UtcNow;
-            //             entry.CurrentValues["ModifiedOn"] = DateTime.UtcNow;
-            //             break;
-
-            //         case EntityState.Deleted:
-            //             entry.State = EntityState.Modified;
-            //             entry.CurrentValues["IsDeleted"] = true;
-            //             entry.CurrentValues["ModifiedOn"] = DateTime.UtcNow;
-            //             break;
-
-            //         case EntityState.Modified:
-            //             entry.State = EntityState.Modified;
-            //             entry.CurrentValues["ModifiedOn"] = DateTime.UtcNow;
-            //             break;
-            //     }
-            // }
+            CustomChangeTracker<ShortLink>();
 
         }
 
 
+        private void CustomChangeTracker<T>() where T : class
+        {
+            foreach (var entry in ChangeTracker.Entries<T>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.CurrentValues["IsDeleted"] = false;
+                        entry.CurrentValues["CreatedOn"] = DateTime.UtcNow;
+                        entry.CurrentValues["ModifiedOn"] = DateTime.UtcNow;
+                        break;
+
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.CurrentValues["IsDeleted"] = true;
+                        entry.CurrentValues["ModifiedOn"] = DateTime.UtcNow;
+                        break;
+
+                    case EntityState.Modified:
+                        entry.State = EntityState.Modified;
+                        entry.CurrentValues["ModifiedOn"] = DateTime.UtcNow;
+                        break;
+                }
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // builder.Entity<Product>().HasQueryFilter(p => !p.IsDeleted);
-
             base.OnModelCreating(builder);
 
             // Custom application mappings
@@ -92,6 +98,16 @@ namespace Liaro.DataLayer.Context
                 entity.Property(ut => ut.RefreshTokenIdHash).HasMaxLength(450).IsRequired();
                 entity.Property(ut => ut.RefreshTokenIdHashSource).HasMaxLength(450);
             });
+
+
+            builder.Entity<ShortLink>(entity =>
+            {
+                // This line will filter soft deleted shortlinks when fetching from db!
+                entity.HasQueryFilter(sl => !sl.IsDeleted);
+                entity.HasIndex(sl => sl.Source).IsUnique();
+            });
+
+
 
         }
 

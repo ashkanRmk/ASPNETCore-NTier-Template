@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Liaro.ModelLayer
@@ -25,5 +26,17 @@ namespace Liaro.ModelLayer
         [JsonProperty(PropertyName = "return")]
         public Return @return { get; set; }
         public Entries entries { get; set; }
+    }
+
+    public class SmsStatusResultVM
+    {
+        public SmsStatusResultVM()
+        {
+            entries = new List<Entries>();
+        }
+
+        [JsonProperty(PropertyName = "return")]
+        public Return @return { get; set; }
+        public List<Entries> entries { get; set; }
     }
 }

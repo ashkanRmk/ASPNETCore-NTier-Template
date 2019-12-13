@@ -1,4 +1,4 @@
-namespace Liaro.ServiceLayer.Security
+namespace Liaro.ModelLayer.Security
 {
     public class BearerTokensOptions
     {

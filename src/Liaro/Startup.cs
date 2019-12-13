@@ -26,6 +26,9 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Liaro.ServiceLayer;
 using Liaro.ServiceLayer.Contracts;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using Liaro.ModelLayer.ShortLink;
 
 namespace Liaro
 {
@@ -49,17 +52,24 @@ namespace Liaro
             services.AddOptions<ApiSettings>()
                 .Bind(Configuration.GetSection("ApiSettings"));
 
+            //Security Services Registrations
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ISecurityService, SecurityService>();
             services.AddScoped<IAntiForgeryCookieService, AntiForgeryCookieService>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IRolesService, RolesService>();
-            services.AddSingleton<ISecurityService, SecurityService>();
             services.AddScoped<IDbInitializerService, DbInitializerService>();
             services.AddScoped<ITokenStoreService, TokenStoreService>();
             services.AddScoped<ITokenValidatorService, TokenValidatorService>();
             services.AddScoped<ITokenFactoryService, TokenFactoryService>();
 
+            //Liaro Services Registrations
             services.AddScoped<IKavenegarService, KavenegarService>();
+            services.AddScoped<IShortLinksService, ShortLinksService>();
+
+            //Model Validator Registrations
+            services.AddTransient<IValidator<ShortLinkCreateVM>, ShortLinkValidator>();
+
 
             services.AddEntityFrameworkNpgsql();
             services.AddDbContextPool<ApplicationDbContext>((serviceProvider, optionsBuilder) =>
@@ -176,7 +186,12 @@ namespace Liaro
                 c.OperationFilter<SwaggerFileUploadOperation>();
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+                    {
+                        options.Filters.Add(typeof(ValidateModelStateAttribute));
+                    })
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                    .AddFluentValidation();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

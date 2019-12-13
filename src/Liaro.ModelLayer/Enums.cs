@@ -5,4 +5,10 @@ namespace Liaro.ModelLayer
         Sms,
         Call
     }
+
+    public enum ShortLinkType
+    {
+        Main,
+        Other
+    }
 }

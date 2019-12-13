@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Liaro.Common;
 using Liaro.Entities.Security;
+using Liaro.ModelLayer.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

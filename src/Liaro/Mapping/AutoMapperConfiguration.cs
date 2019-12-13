@@ -1,5 +1,7 @@
 
 using AutoMapper;
+using Liaro.Entities;
+using Liaro.ModelLayer.ShortLink;
 
 namespace Liaro.Mapping
 {
@@ -7,6 +9,8 @@ namespace Liaro.Mapping
     {
         public AutoMapperConfiguration()
         {
+            CreateMap<ShortLinkCreateVM, ShortLink>();
+            CreateMap<ShortLinkUpdateVM, ShortLink>();
 
         }
     }

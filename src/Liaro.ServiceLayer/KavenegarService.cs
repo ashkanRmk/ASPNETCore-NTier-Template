@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Liaro.Common;
 using Liaro.ModelLayer;
@@ -21,6 +22,20 @@ namespace Liaro.ServiceLayer
         public async Task<SmsResultVM> SendLoginCode(string loginCode, string mobile, string fullName)
         {
             return await SendLookup("login", mobile, PhoneCodeType.Sms, fullName, loginCode);
+        }
+
+        public async Task<SmsStatusResultVM> CheckMessageStatus(List<string> messageIds)
+        {
+            if (messageIds == null)
+                return null;
+
+            var ids = string.Join(",", messageIds);
+            var request = new RestRequest($"/v1/{ApiKey}/sms/status.json");
+            request.AddParameter("messageid", ids);
+
+            var response = await _client.ExecuteTaskAsync<SmsStatusResultVM>(request);
+
+            return response.Data;
         }
 
         public async Task<SmsResultVM> SendLookup(string templateName, string receptor, PhoneCodeType type, string token,

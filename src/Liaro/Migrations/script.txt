@@ -22,3 +22,15 @@ dotnet ef migrations script 20191027130854_init 20191028183935_add-mobile-login 
 
 Created Time: 2019-10-28.22:10:03
 -----------------------------------
+dotnet ef migrations add add-shortlink-table
+
+Created Time: 2019-12-13.19:48:58
+-----------------------------------
+dotnet ef migrations add add-shortlink-table
+
+Created Time: 2019-12-13.19:49:37
+-----------------------------------
+dotnet ef migrations script 20191028183935_add-mobile-login 20191213161950_add-shortlink-table -o ./Migrations/Scripts/20191213161950_add-shortlink-table.sql
+
+Created Time: 2019-12-13.19:50:08
+-----------------------------------
