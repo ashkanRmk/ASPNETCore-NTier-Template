@@ -25,6 +25,7 @@
 - [X] DotNet Watcher
 - [X] Bundler Minifier
 - [X] Short links generator
+- [X] Dockerized
 - [ ] Hangfire
 - [ ] RabbitMQ
 - [ ] Minio Object Storage
