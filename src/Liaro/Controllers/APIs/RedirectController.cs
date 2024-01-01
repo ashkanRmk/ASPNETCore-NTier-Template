@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using Liaro.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Liaro.Common;
+using Liaro.Entities;
 using Liaro.ServiceLayer.Security;
 using Liaro.ServiceLayer;
 using Liaro.ModelLayer;
@@ -18,13 +18,10 @@ namespace Liaro.Controllers.APIs
 
         public RedirectController(
             IShortLinksService shortLinksService,
-            IMapper mapper
-
-        )
+            IMapper mapper)
         {
             _shortLinksService = shortLinksService;
             _mapper = mapper;
-
         }
 
         [Authorize(Policy = CustomRoles.Admin)]

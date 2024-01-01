@@ -1,8 +1,5 @@
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Liaro.Common;
-using Liaro.Entities.Security;
 using Liaro.ModelLayer;
 using Liaro.ModelLayer.Security;
 using Liaro.ServiceLayer.Contracts;
