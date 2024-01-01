@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
-namespace Liaro.Controllers.APIs
+namespace Liaro.Controllers
 {
     [Authorize]
     [Route("api/[controller]/[action]")]

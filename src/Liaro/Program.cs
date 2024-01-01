@@ -32,7 +32,7 @@ namespace Liaro
                     o.AttachStacktrace = true;
                 })
                 .UseStartup<Startup>()
-                .UseSerilog()
+                // .UseSerilog()
                 .UseUrls("http://*:5000");
     }
 }

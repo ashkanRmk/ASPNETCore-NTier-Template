@@ -16,7 +16,7 @@ namespace Liaro.ServiceLayer
 
         public KavenegarService()
         {
-            _client = new RestClient("https://api.kavenegar.com") { Timeout = 50000 };
+            _client = new RestClient("https://api.kavenegar.com");
         }
 
         public async Task<SmsResultVM> SendLoginCode(string loginCode, string mobile, string fullName)
@@ -33,7 +33,7 @@ namespace Liaro.ServiceLayer
             var request = new RestRequest($"/v1/{ApiKey}/sms/status.json");
             request.AddParameter("messageid", ids);
 
-            var response = await _client.ExecuteTaskAsync<SmsStatusResultVM>(request);
+            var response = await _client.ExecuteAsync<SmsStatusResultVM>(request);
 
             return response.Data;
         }
@@ -60,7 +60,7 @@ namespace Liaro.ServiceLayer
             if (!string.IsNullOrWhiteSpace(token2)) request.AddParameter("token2", token2);
             if (!string.IsNullOrWhiteSpace(token3)) request.AddParameter("token20", token3);
 
-            var response = await _client.ExecuteTaskAsync<SmsResultVM>(request);
+            var response = await _client.ExecuteAsync<SmsResultVM>(request);
             return response.Data;
         }
     }

@@ -74,7 +74,7 @@ namespace Liaro
             services.AddEntityFrameworkNpgsql();
             services.AddDbContextPool<ApplicationDbContext>((serviceProvider, optionsBuilder) =>
             {
-                optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("LiaroDb"),
+                optionsBuilder.UseNpgsql(Configuration.GetConnectionString("LiaroDb"),
                     b => b.MigrationsAssembly("Liaro"));
             });
 
@@ -163,27 +163,27 @@ namespace Liaro
 
             services.AddSwaggerGen(c =>
             {
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
-                {
-                    In = "header",
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
-                    Name = "Authorization",
-                    Type = "apiKey"
-                });
+                // c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+                // {
+                //     In = "header",
+                //     Description = "JWT Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                //     Name = "Authorization",
+                //     Type = "apiKey"
+                // });
 
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                {
-                    {"Bearer", new string[] { }}
-                });
-
-                c.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "Liaro | لیارو",
-                    Description = "My Liaro Open API",
-                    TermsOfService = "None"
-                });
-                c.OperationFilter<SwaggerFileUploadOperation>();
+                // c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                // {
+                //     {"Bearer", new string[] { }}
+                // });
+                //
+                // c.SwaggerDoc("v1", new Info
+                // {
+                //     Version = "v1",
+                //     Title = "Liaro | لیارو",
+                //     Description = "My Liaro Open API",
+                //     TermsOfService = "None"
+                // });
+                // c.OperationFilter<SwaggerFileUploadOperation>();
             });
 
             services.AddMvc(options =>
@@ -237,22 +237,11 @@ namespace Liaro
                 dbInitializer.Initialize();
                 dbInitializer.SeedData();
             }
-
-
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseStaticFiles();
-            // app.UseCookiePolicy();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
 
             app.UseSwagger();
 

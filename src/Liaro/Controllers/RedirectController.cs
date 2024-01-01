@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Liaro.Common;
 using Liaro.Entities;
-using Liaro.ServiceLayer.Security;
-using Liaro.ServiceLayer;
 using Liaro.ModelLayer;
 using Liaro.ModelLayer.ShortLink;
+using Liaro.ServiceLayer;
+using Liaro.ServiceLayer.Security;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Liaro.Controllers.APIs
+namespace Liaro.Controllers
 {
     public class RedirectController : ControllerBase
     {
