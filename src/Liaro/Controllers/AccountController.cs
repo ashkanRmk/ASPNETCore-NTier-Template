@@ -16,7 +16,6 @@ namespace Liaro.Controllers
     {
         private readonly IUsersService _usersService;
         private readonly ITokenStoreService _tokenStoreService;
-        private readonly IAntiForgeryCookieService _antiforgery;
         private readonly ITokenFactoryService _tokenFactoryService;
         private readonly IKavenegarService _kavenegarService;
 
@@ -24,17 +23,13 @@ namespace Liaro.Controllers
             IUsersService usersService,
             ITokenStoreService tokenStoreService,
             ITokenFactoryService tokenFactoryService,
-            IKavenegarService kavenegarService,
-            IAntiForgeryCookieService antiforgery)
+            IKavenegarService kavenegarService)
         {
             _usersService = usersService;
             _usersService.CheckArgumentIsNull(nameof(usersService));
 
             _tokenStoreService = tokenStoreService;
             _tokenStoreService.CheckArgumentIsNull(nameof(tokenStoreService));
-
-            _antiforgery = antiforgery;
-            _antiforgery.CheckArgumentIsNull(nameof(antiforgery));
 
             _tokenFactoryService = tokenFactoryService;
             _tokenFactoryService.CheckArgumentIsNull(nameof(tokenFactoryService));
@@ -44,7 +39,6 @@ namespace Liaro.Controllers
         }
 
         [AllowAnonymous]
-        [IgnoreAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]LoginVM loginUser)
         {
@@ -63,13 +57,10 @@ namespace Liaro.Controllers
             var result = await _tokenFactoryService.CreateJwtTokensAsync(user);
             await _tokenStoreService.AddUserTokenAsync(user, result.RefreshTokenSerial, result.AccessToken, null);
 
-            _antiforgery.RegenerateAntiForgeryCookies(result.Claims);
-
             return Ok(new { access_token = result.AccessToken, refresh_token = result.RefreshToken });
         }
 
         [AllowAnonymous]
-        [IgnoreAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> LoginByMobileInit([FromBody]LoginByMobileVM model)
         {
@@ -89,7 +80,6 @@ namespace Liaro.Controllers
         }
 
         [AllowAnonymous]
-        [IgnoreAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> LoginByMobile([FromBody]LoginByMobileVM model)
         {
@@ -103,8 +93,6 @@ namespace Liaro.Controllers
 
             var result = await _tokenFactoryService.CreateJwtTokensAsync(user);
             await _tokenStoreService.AddUserTokenAsync(user, result.RefreshTokenSerial, result.AccessToken, null);
-
-            _antiforgery.RegenerateAntiForgeryCookies(result.Claims);
 
             return Ok(new { access_token = result.AccessToken, refresh_token = result.RefreshToken });
         }
@@ -128,8 +116,6 @@ namespace Liaro.Controllers
             var result = await _tokenFactoryService.CreateJwtTokensAsync(token.User);
             await _tokenStoreService.AddUserTokenAsync(token.User, result.RefreshTokenSerial, result.AccessToken, _tokenFactoryService.GetRefreshTokenSerial(refreshTokenValue));
 
-            _antiforgery.RegenerateAntiForgeryCookies(result.Claims);
-
             return Ok(new { access_token = result.AccessToken, refresh_token = result.RefreshToken });
         }
 
@@ -142,8 +128,6 @@ namespace Liaro.Controllers
             // The Jwt implementation does not support "revoke OAuth token" (logout) by design.
             // Delete the user's tokens from the database (revoke its bearer token)
             await _tokenStoreService.RevokeUserBearerTokensAsync(userId.ToString(), refreshToken);
-
-            _antiforgery.DeleteAntiForgeryCookies();
 
             return true;
         }
