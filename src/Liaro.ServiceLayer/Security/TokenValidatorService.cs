@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Liaro.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Liaro.ServiceLayer.Security
 {
@@ -58,9 +59,9 @@ namespace Liaro.ServiceLayer.Security
                 context.Fail("This token is expired. Please login again.");
             }
 
-            var accessToken = context.SecurityToken as JwtSecurityToken;
-            if (accessToken == null || string.IsNullOrWhiteSpace(accessToken.RawData) ||
-                !await _tokenStoreService.IsValidTokenAsync(accessToken.RawData, userId))
+            var accessToken = context.SecurityToken as JsonWebToken;
+            if (accessToken == null || string.IsNullOrWhiteSpace(accessToken.EncodedToken) ||
+                !await _tokenStoreService.IsValidTokenAsync(accessToken.EncodedToken, userId))
             {
                 context.Fail("This token is not in our database.");
                 return;

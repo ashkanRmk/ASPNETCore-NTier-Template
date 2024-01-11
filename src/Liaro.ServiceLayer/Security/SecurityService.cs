@@ -16,12 +16,10 @@ namespace Liaro.ServiceLayer.Security
 
         public string GetSha256Hash(string input)
         {
-            using (var hashAlgorithm = new SHA256CryptoServiceProvider())
-            {
-                var byteValue = Encoding.UTF8.GetBytes(input);
-                var byteHash = hashAlgorithm.ComputeHash(byteValue);
-                return Convert.ToBase64String(byteHash);
-            }
+            using var hashAlgorithm = SHA256.Create();
+            var byteValue = Encoding.UTF8.GetBytes(input);
+            var byteHash = hashAlgorithm.ComputeHash(byteValue);
+            return Convert.ToBase64String(byteHash);
         }
 
         public Guid CreateCryptographicallySecureGuid()
