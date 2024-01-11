@@ -104,7 +104,7 @@ services
             OnAuthenticationFailed = context =>
             {
                 var logger = context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger(nameof(JwtBearerEvents));
-                logger.LogError("Authentication failed.", context.Exception);
+                logger.LogError("Authentication failed. Exeption:{}", context.Exception);
                 return Task.CompletedTask;
             },
             OnTokenValidated = context =>
@@ -119,7 +119,7 @@ services
             OnChallenge = context =>
             {
                 var logger = context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger(nameof(JwtBearerEvents));
-                logger.LogError("OnChallenge error", context.Error, context.ErrorDescription);
+                logger.LogError("OnChallenge error Exeption:{}, Description:{}", context.Error, context.ErrorDescription);
                 return Task.CompletedTask;
             }
         };

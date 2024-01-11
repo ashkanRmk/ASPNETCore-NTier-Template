@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Liaro</RootNamespace>
   </PropertyGroup>
-  
+
 
   <ItemGroup>
     <PackageReference Include="Sentry.AspNetCore" Version="3.41.3" />
@@ -21,16 +21,5 @@
     <ProjectReference Include="..\Liaro.Common\Liaro.Common.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Shared\Error.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Shared\_CookieConsentPartial.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\_ViewImports.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\_ViewStart.cshtml" />
-  </ItemGroup>
 
 </Project>
