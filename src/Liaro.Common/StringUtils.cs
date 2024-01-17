@@ -117,13 +117,7 @@ namespace Liaro.Common
         #region CensorText
         public static IList<string> CensoredWords = new List<string>()
         {
-            "sex","داف","شهوتی","کس دادن","کوس","کون دادن","کون کردن","کونکش","لخت","لختی","کس شر",
-            "fuck","porn","نفوذ","سکس","کون","کرک","کس کش","هرزه","هک","ارگاسم","تجاوز","جلق",
-            "جقی","جنده","چوچول","دودول","ساک زدن","کس کن","کس کردن","فیلم سوپر","کس دادن","کیر",
-            "کس کش","تجاوز","تخمی","حشر","حشری","لاپا","لاشی","سوپر","شهوت","سکسی","sexy","sexi",
-            "کونی","کیری","لاپایی","حرومزاده","hack","crack","bet","kir","kos","sighe","shaparak","shap","tajavoz"
-            ,"koni","harze","shart","shartbandi","ghomar","gamble","sigheyab","pussy","dick","cock","ass","hot"
-            ,"nude","pishbini"
+            "bad-words"
         };
 
         public static string CensorText(this string text)
