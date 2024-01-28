@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Liaro.Migrations
 {
-    public partial class addmobilelogin : Migration
+    public partial class Addmobilelogin : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
