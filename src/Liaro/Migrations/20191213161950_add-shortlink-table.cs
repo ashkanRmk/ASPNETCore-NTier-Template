@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Liaro.Migrations
 {
-    public partial class addshortlinktable : Migration
+    public partial class Addshortlinktable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -11,7 +11,7 @@ namespace Liaro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20191028183935_add-mobile-login")]
-    partial class addmobilelogin
+    partial class Addmobilelogin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
