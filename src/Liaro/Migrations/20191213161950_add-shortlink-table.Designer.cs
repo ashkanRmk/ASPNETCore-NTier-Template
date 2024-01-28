@@ -11,7 +11,7 @@ namespace Liaro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20191213161950_add-shortlink-table")]
-    partial class addshortlinktable
+    partial class Addshortlinktable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

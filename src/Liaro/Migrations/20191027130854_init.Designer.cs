@@ -11,7 +11,7 @@ namespace Liaro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20191027130854_init")]
-    partial class init
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
