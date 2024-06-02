@@ -14,37 +14,39 @@ namespace Liaro.DataLayer.Repository
         where T : class, new()
     {
         private ApplicationDbContext _context;
+        private readonly DbSet<T> _dbSet;
 
         #region Properties
         public EntityBaseRepository(ApplicationDbContext context)
         {
             _context = context;
+            _dbSet =  context.Set<T>();
         }
         #endregion
 
         public virtual IEnumerable<T> GetAll()
         {
-            return _context.Set<T>().AsEnumerable();
+            return _dbSet.AsEnumerable();
         }
 
         public virtual IQueryable<T> GetAllQueryable()
         {
-            return _context.Set<T>().AsQueryable();
+            return _dbSet.AsQueryable();
         }
 
         public virtual int Count()
         {
-            return _context.Set<T>().Count();
+            return _dbSet.Count();
         }
 
         public async Task<int> CountAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _context.Set<T>().CountAsync(predicate);
+            return await _dbSet.CountAsync(predicate);
         }
 
         public virtual IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
         {
-            IQueryable<T> query = _context.Set<T>();
+            IQueryable<T> query = _dbSet;
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -54,12 +56,12 @@ namespace Liaro.DataLayer.Repository
 
         public T GetSingle(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().FirstOrDefault(predicate);
+            return _dbSet.FirstOrDefault(predicate);
         }
 
         public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
-            IQueryable<T> query = _context.Set<T>();
+            IQueryable<T> query = _dbSet;
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -69,7 +71,7 @@ namespace Liaro.DataLayer.Repository
 
         public T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
-            IQueryable<T> query = _context.Set<T>();
+            IQueryable<T> query = _dbSet;
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -80,12 +82,12 @@ namespace Liaro.DataLayer.Repository
 
         public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().Where(predicate);
+            return _dbSet.Where(predicate);
         }
 
         public virtual async Task<List<T>> FindByAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _context.Set<T>().Where(predicate).ToListAsync();
+            return await _dbSet.Where(predicate).ToListAsync();
         }
 
         public virtual void CloneEntity(T entity)
@@ -96,7 +98,7 @@ namespace Liaro.DataLayer.Repository
 
         public virtual void Add(T entity)
         {
-            _context.Set<T>().Add(entity);
+            _dbSet.Add(entity);
         }
 
         public virtual void Update(T entity)
@@ -112,7 +114,7 @@ namespace Liaro.DataLayer.Repository
 
         public virtual void DeleteWhere(Expression<Func<T, bool>> predicate)
         {
-            IEnumerable<T> entities = _context.Set<T>().Where(predicate);
+            IEnumerable<T> entities = _dbSet.Where(predicate);
 
             foreach (var entity in entities)
             {
@@ -140,7 +142,7 @@ namespace Liaro.DataLayer.Repository
 
         public async Task<T> FirstOrDefaultAsync()
         {
-            return await _context.Set<T>().FirstOrDefaultAsync();
+            return await _dbSet.FirstOrDefaultAsync();
         }
 
         public virtual async Task CommitAsync()
@@ -162,7 +164,7 @@ namespace Liaro.DataLayer.Repository
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _context.Set<T>().AnyAsync(predicate);
+            return await _dbSet.AnyAsync(predicate);
         }
 
     }
