@@ -1,3 +1,5 @@
+
+
 # ASP.NET Core 2.2 Advanced Template
 
 > :wrench: IN PROGRESS...
@@ -37,5 +39,11 @@
 - LiaroDb
 - Kavenegar_APIKey
 - Kavenegar_Number
+
+## Default Admin Credentials
+
+- Username: `Ashkan`
+- Password: `1234`
+- *(Automatically seeded on first application run)*
 
 ### Full documentation will Comming Soon! :)
